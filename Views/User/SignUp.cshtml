@@ -17,18 +17,18 @@
                          @Html.ValidationSummary(true)
                          <div class="row">
                              <div class="col-xs-6 col-md-6">
-                                 @Html.EditorFor(x => x.FirstName, new { @class = "form-control", id = "fn", placeholder = "First Name", required = "required", autofocus = "autofocus" })
+                                 @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", id = "fn", placeholder = "First Name", required = "required", autofocus = "autofocus" })
                              </div>
                              <div class="col-xs-6 col-md-6">
-                                 @Html.EditorFor(x => x.LastName, new { @class = "form-control", id = "ln", placeholder = "Last Name", required = "required" })
+                                 @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", id = "ln", placeholder = "Last Name", required = "required" })
                              </div>
                          </div>
                          <div id="x"></div>
                          <div id="checking">Checking...</div>
-                         @Html.EditorFor(x => x.UserName, new { @class = "form-control", id = "un", placeholder = "User Name", required = "required" })
-                         @Html.EditorFor(x => x.EmailID, new { @class = "form-control", id = "em", placeholder = "your email", required = "required" })
+                         @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", id = "un", placeholder = "User Name", required = "required" })
+                         @Html.TextBoxFor(x => x.EmailID, new { @class = "form-control", id = "em", placeholder = "your email", required = "required" })
                          <input type="text" id="em1" placeholder="Re-Enter Email" required class="form-control" />
-                         @Html.EditorFor(x => x.Password, new { @class = "form-control", id = "pa", placeholder = "New Password", required = "required" })
+                         @Html.TextBoxFor(x => x.Password, new { @class = "form-control", id = "pa", placeholder = "New Password", required = "required" })
                          <label for="">
                              Birth Date
                          </label>
