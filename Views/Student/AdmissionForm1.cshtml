@@ -1,0 +1,59 @@
+﻿
+
+@{
+    ViewBag.Title = "AdmissionForm1";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="jumbotron" style="margin-bottom: 0px; background-image: url(~/Content/images/background_bottom-gif.jpg); background-position: 0% 25%; background-size: cover; background-repeat: no-repeat; color: white; text-shadow: black 0.3em 0.3em 0.3em ">
+    <h2>Academic Information Form</h2>
+</div>
+            
+                
+<h2>HSSC/A-Levels</h2>
+
+                   
+                        <div class="form-group">
+                            <form method="post" action="/Student/Academic">
+                                <div class="col-xs-6 col-md-8">
+                                    <b>FormId</b>
+                                    <input type="text" name="FormId" value="@ViewBag.h" class="form-control" />
+                                    <b>Degree Name</b>
+                                    <select class="form-control" name="DegreeName" id="deg">
+                                        <option>--Select Degree--</option>
+                                        <option>HSSC</option>
+                                        <option>O-Levels</option>
+                                    </select>
+                                    <br />
+                                    <b>Year</b>
+                                    <select class="form-control" name="Year" id="yr">
+                                        <option>--Select Year--</option>
+                                        <option>2006</option>
+                                        <option>2007</option>
+                                        <option>2008</option>
+                                        <option>2009</option>
+                                        <option>2010</option>
+                                        <option>2011</option>
+                                        <option>2012</option>
+                                        <option>2013</option>
+                                        <option>2014</option>
+                                    </select>
+                                    <br />
+                                    <b>Marks/CGPA</b>
+                                    <input type="text" class="form-control" name="Marks_CGPA" id="mcgpa" />
+                                    <b>Grade</b>
+                                    <input type="text" class="form-control" name="Grade" id="grade" />
+                                    <b>Subjects</b>
+                                    <select class="form-control" name="Subject" id="sub">
+                                        <option disabled="disabled">--Select Subject--</option>
+                                        <option>FSc. Pre-Engineering</option>
+                                        <option>FSc. Pre-Medical</option>
+                                        <option>ICS Physics/Math/Computer</option>
+                                        <option>ICS Others</option>
+                                    </select>
+                                    <br />
+                                    <input type="submit" value="Submit Form" class="btn btn-success" />
+                                </div>
+                                
+                            </form>
+                        </div>

@@ -1,0 +1,67 @@
+﻿@model List<MvcApplication1.Models.PersonalInformation>
+           
+
+
+@{
+    ViewBag.Title = "ViewAll";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+    <div class="container">
+        @foreach (var s in Model)
+        {
+        <div class="span3 well">
+            <center>
+                <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="~/Files/@s.Photo" name="aboutme" width="140" height="140" class="img-circle"></a>
+                <h3>@s.FirstName</h3>
+                <em>click my face for more</em>
+            </center>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" id="myModalLabel">@s.FirstName</h4>
+                    </div>
+                    <div class="modal-body">
+                        <center>
+                        <table>
+                            <tr>
+                                <td>
+                            <img src="~/Files/@s.Photo" name="aboutme" width="140" height="140" border="0" class="img-circle" />
+                            <h3 class="media-heading">@s.FirstName<small> @s.Country</small></h3>
+                             
+                            </td>
+                            </tr>
+                        </table>
+                        </center>
+                        <hr>
+                        <center>
+                            <p class="text-center">
+                                <strong>Bio: </strong><br>
+                                <strong>Form ID</strong> @s.FormId<br />
+                                <strong>First Name</strong> @s.FirstName<br />
+                                <strong>Last Name</strong> @s.LastName<br />
+                                <strong>CNIC</strong> @s.CNIC<br />
+                                <strong>Religion</strong> @s.Religion<br />
+                                <strong>Phone Number</strong> @s.MobileNumber<br />
+                                <strong>Date Of Birth</strong> @s.DOB<br />
+                            </p>
+                            <br>
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <span><a href="/Admin/Delete/@s.FormId" class="btn btn-danger">Delete</a></span>
+                        </center>
+                    </div>
+            </div>
+            </div>
+            </div>
+        }
+    </div>

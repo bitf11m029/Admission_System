@@ -1,0 +1,41 @@
+﻿@model List<MvcApplication1.Models.PersonalInformation>
+
+@{
+    ViewBag.Title = "ImageGallery";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<link rel="stylesheet" href="//frontend.reklamor.com/fancybox/jquery.fancybox.css" media="screen">
+<script src="//frontend.reklamor.com/fancybox/jquery.fancybox.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //FANCYBOX
+        //https://github.com/fancyapps/fancyBox
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+    });
+</script>
+
+
+
+<div class="container">
+    <div class="row">
+    @foreach(var s in Model)
+    {
+        <div class='list-group gallery'>
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="../Files/@s.Photo">
+                    <img class="img-responsive" alt="" src="~/Files/@s.Photo" />
+                    <div class='text-right'>
+                        <small class='text-muted'>Image Title</small>
+                    </div> <!-- text-right / end -->
+                </a>
+            </div> <!-- col-6 / end -->
+             <!-- col-6 / end -->
+        </div> <!-- list-group / end -->
+    }
+    </div> <!-- row / end -->
+</div> <!-- container / end -->

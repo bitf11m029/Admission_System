@@ -1,0 +1,53 @@
+﻿@model List<MvcApplication1.Models.PersonalInformation>
+
+@{
+    ViewBag.Title = "Verify";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Verification Panel</h2>
+</div>
+
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <h4>Bootstrap Snipp for Datatable</h4>
+            <div class="table-responsive">
+
+
+                <table id="mytable" class="table table-bordred table-striped">
+
+
+                    <th>FormID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>CNIC</th>
+                    <th>Religion</th>
+                    <th>Date Of Birth</th>
+                    <th>Verify</th>
+                    <tbody>
+                        @foreach(var s in Model)
+                        { 
+                        <tr>
+                            <td>@s.FormId</td>
+                            <td>@s.FirstName</td>
+                            <td>@s.LastName</td>
+                            <td>@s.Address</td>
+                            <td>@s.CNIC</td>
+                            <td>@s.Religion</td>
+                            <td>@s.DOB</td>
+                            <td><p><a class="btn btn-primary btn-xs" href="/Student/Verify/@s.FormId"><span class="glyphicon glyphicon-pencil"></span></a></p></td>
+                        </tr>
+                        }
+                    </tbody>
+      
+                      </table>
+           </div>
+        </div>
+       </div>
+    </div>

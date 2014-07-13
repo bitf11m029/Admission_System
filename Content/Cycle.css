@@ -1,0 +1,10 @@
+.cycle {
+  background-image: url(http://pucitforum.com/wp-content/uploads/2012/01/upload.jpg);
+  height: 415px;
+  cursor: move;
+}
+.box {
+  width: 512px;
+  margin: 0 auto;
+  font-family: arial, sans-serif;
+}

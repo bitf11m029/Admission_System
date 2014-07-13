@@ -1,0 +1,14 @@
+﻿@model MvcApplication1.Models.PersonalInformation
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="jumbotron">
+    <h2>
+        Delete Record
+    </h2>
+</div>
+<form method="post" action="/Admin/DeleteStudent">
+    Form ID: <input type="text" name="FormId" value="@Model.FormId" class="form-control"  />
+    <input type="submit" value="Delete" class="btn btn-primary" /> 
+</form>

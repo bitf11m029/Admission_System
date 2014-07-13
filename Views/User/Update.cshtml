@@ -1,0 +1,142 @@
+﻿@model MvcApplication1.Models.PersonalInformation
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+
+
+            <script>
+                $(document).ready(function () {
+                    $("#ret").hide();
+                    $("#b1").click(function () {
+                        $("#ret").show();
+                        var userName = $('#cn').val();
+                       
+                        
+                        $.getJSON("/User/check?Id=" + userName, function (data) {
+                            $("#ret").hide();
+                            if (data) {
+                                alert('Record  Found.');
+                                $('#f1').val(data.FormId) ;
+                                $('#fn').val(data.FirstName);
+                                $('#l1').val(data.LastName);
+                                $('#dob').val(data.DOB);
+                                $('#cnic').val(data.CNIC);
+                                $('#fathna').val(data.FatherName);
+                                $('#add').val(data.Address);
+                                $('#pn').val(data.PhoneNumber);
+                                $('#mn').val(data.MobileNumber);
+                                $('rel').val(data.Religion);
+                                $('#nat').val(data.Nationality);
+                                $('#con').val(data.Country);
+                                $('#city').val(data.City);
+                                $('#pho').val(data.Photo);
+
+                                //$('#d1').load("/Admission/Load?cnic=" + userName);
+                                //$('#inputFname').val("");
+                            }
+                            if (!data) {
+                                alert('Record  Not Found.');
+                                $("#fn").val("");
+                                $("#l1").val("");
+                                $("#dob").val("");
+                                $("#cnic").val("");
+                                $("#fathna").val("");
+                                $("#add").val("");
+                                $("#pn").val("");
+                                $("#mn").val("");
+                                $("#nat").val("");
+                                $("#city").val("");
+                            }
+
+                        });
+
+                    });
+                });
+            </script>
+
+<div class="jumbotron">
+    <h2>Update Information Form</h2>
+    <div id="ret">Retrieving..</div>
+    <center>
+       
+        Enter CNIC No.<input type="text" id="cn" class="form-control" />
+        <button id="b1" class="btn btn-success" >Search</button>
+    </center>
+</div>
+
+
+<div class="form-group">
+    <form method="post" action="/User/UpdateStudent" id="Adform" enctype="multipart/form-data">
+        <div class="col-xs-6 col-md-10">
+            <b>FormId</b>
+            <input type="text" class="form-control" name="FormId" id="f1" required="required"/>
+            @Html.ValidationMessageFor(x => x.FormId)
+            <b>First Name</b>
+            <input type="text" class="form-control" name="FirstName" id="fn" required="required" />
+            @Html.ValidationMessageFor(x => x.FirstName)
+            <br />
+            <b>Last Name</b>
+            <input type="text" class="form-control" name="LastName" id="l1" required="required" />
+            @Html.ValidationMessageFor(x => x.LastName)
+            <br />
+            <b>Date Of Birth</b>
+            <input type="text" class="form-control" name="DOB" id="dob" required="required" />
+            @Html.ValidationMessageFor(x => x.DOB)
+            <b>CNIC</b>
+            <input type="text" class="form-control" name="CNIC" id="cnic" required="required" />
+            @Html.ValidationMessageFor(x => x.CNIC)
+            <b>Father's Name</b>
+            <input type="text" class="form-control" name="FatherName" id="fathna" required="required" />
+            @Html.ValidationMessageFor(x => x.FatherName)
+            <b>Address</b>
+            <textarea class="form-control" name="Address" id="add" rows="3" cols="30"></textarea>
+            <b>Phone Number</b>
+            <input type="text" class="form-control" name="PhoneNumber" id="pn" />
+            <b>Mobile Number</b>
+            <input type="text" class="form-control" name="MobileNumber" id="mn" required="required" />
+            <br />
+            <b>Religion</b>
+            Islam <input type="radio" class="radio-inline" name="religion" id="rel" value="Islam" required="required" />
+            Others <input type="radio" class="radio-inline" name="religion" id="rel" value="Others" />
+            <br />
+            <br />
+            <b>Nationality</b>
+            <input type="text" class="form-control" name="Nationality" id="nat" required="required" />
+            <b>Country</b>
+            <select class="form-control" name="Country" id="con" required="required">
+                <option>--Select Country--</option>
+                <option>America</option>
+                <option>Pakistan</option>
+                <option>India</option>
+                <option>France</option>
+                <option>England</option>
+            </select>
+
+            <b>City</b>
+            <select class="form-control" name="City" id="city" required="required">
+                <option>--Select City--</option>
+                <option>Lahore</option>
+                <option>Karachi</option>
+                <option>Islamabad</option>
+                <option>Peshawar</option>
+                <option>Quetta</option>
+            </select>
+
+            <b>Upload Photo</b>
+            <input type="file" id="pho" name="Photo" accept="image/*" />
+
+            <br />
+            <div class="col-xs-6 col-sm-4">
+            </div>
+            <input type="submit" class="btn btn-success" value="Update" />
+            <button type="button" class="btn btn-primary" id="reset">Reset</button>
+        </div>
+    </form>
+</div>
+
+
+        

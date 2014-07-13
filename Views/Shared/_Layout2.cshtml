@@ -1,0 +1,274 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @section Scripts
+    {
+        @Scripts.Render("~bundles/jquery")
+    }
+    <meta name="viewport" content="width=device-width" />
+    <title>Admission Portal/@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/sticky-footer-navbar.css" rel="stylesheet" />
+    <link href="~/Content/signup.css" rel="stylesheet" />
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
+    <link href="~/Content/accordion1.css" rel="stylesheet" />
+    <link href="~/Content/Gallery.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment-min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#checking').hide();
+
+            $('#un').mouseout(function () {
+
+                var userName = $('#un').val();
+
+
+                $('#checking').show();
+
+                $.getJSON("/User/CheckUserName?UN=" + userName, function (data) {
+
+                    $('#checking').hide();
+                    if (data == true) {
+                        alert('User Name =' + userName);
+                        $('#x').text("User already exists in database");
+                    }
+                    else {
+                        $('#x').text("User Name is available");
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#ch').hide();
+
+            $('#butt').click(function () {
+
+                var userName = $('#sta').val();
+
+
+                $('#ch').show();
+
+                $.getJSON("/Student/Checking?ID=" + userName, function (data) {
+
+                    $('#ch').hide();
+                    if (data == true) {
+                        alert('You have been registered successfully');
+                    }
+                    else {
+                        alert('Your form is still in process');
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('#rn1').keyup(function () {
+                var value = $('#rn1').val();
+
+                //$('#d1').load('/Home/search?cat=' + value);
+                $.getJSON("/Student/search?Roll=" + value, function (data) {
+                    var arr_list = [];
+                    $.each(data, function (i, x) {
+                        arr_list[i] = x;
+                        $('#rn1').autocomplete({ source: arr_list });
+                    });
+                   // $('#rn1').autocomplete({ source: arr_list });
+                });
+
+            });
+        });
+    </script>
+
+   <script>
+       $(document).ready(function () {
+           $(function () {
+               $('#accordion').accordion();
+           });
+
+       });
+   </script>
+    <script>
+        $(document).ready(function () {
+            
+            var roll = $("#rn1").val();
+            $("#check").hide();
+            $('#but1').click(function () {
+                $("#check").show();
+                $.getJSON("/Student/GetStudentMarks?RO="+roll, function (data) {
+                    $("#check").hide();
+                    if (data != null) {
+                        $('#mrks').text("Marks " + data.Marks + "\n" + "Father's Name " +
+                            data.FathersName + "\n" + "Status " + data.Status);
+                    }
+                    else
+                        $('#mrks').text("No records found");
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(window).on('focus', function (event) {
+                $('.show-focus-status > .alert-danger').addClass('hidden');
+                $('.show-focus-status > .alert-success').removeClass('hidden');
+            }).on('blur', function (event) {
+                $('.show-focus-status > .alert-success').addClass('hidden');
+                $('.show-focus-status > .alert-danger').removeClass('hidden');
+            });
+
+            $('.date-picker').each(function () {
+                var $datepicker = $(this),
+                    cur_date = ($datepicker.data('date') ? moment($datepicker.data('date'), "YYYY/MM/DD") : moment()),
+                    format = {
+                        "weekday": ($datepicker.find('.weekday').data('format') ? $datepicker.find('.weekday').data('format') : "dddd"),
+                        "date": ($datepicker.find('.date').data('format') ? $datepicker.find('.date').data('format') : "MMMM Do"),
+                        "year": ($datepicker.find('.year').data('year') ? $datepicker.find('.weekday').data('format') : "YYYY")
+                    };
+
+                function updateDisplay(cur_date) {
+                    $datepicker.find('.date-container > .weekday').text(cur_date.format(format.weekday));
+                    $datepicker.find('.date-container > .date').text(cur_date.format(format.date));
+                    $datepicker.find('.date-container > .year').text(cur_date.format(format.year));
+                    $datepicker.data('date', cur_date.format('YYYY/MM/DD'));
+                    $datepicker.find('.input-datepicker').removeClass('show-input');
+                }
+
+                updateDisplay(cur_date);
+
+                $datepicker.on('click', '[data-toggle="calendar"]', function (event) {
+                    event.preventDefault();
+                    $datepicker.find('.input-datepicker').toggleClass('show-input');
+                });
+
+                $datepicker.on('click', '.input-datepicker > .input-group-btn > button', function (event) {
+                    event.preventDefault();
+                    var $input = $(this).closest('.input-datepicker').find('input'),
+                        date_format = ($input.data('format') ? $input.data('format') : "YYYY/MM/DD");
+                    if (moment($input.val(), date_format).isValid()) {
+                        updateDisplay(moment($input.val(), date_format));
+                    } else {
+                        alert('Invalid Date');
+                    }
+                });
+
+                $datepicker.on('click', '[data-toggle="datepicker"]', function (event) {
+                    event.preventDefault();
+
+                    var cur_date = moment($(this).closest('.date-picker').data('date'), "YYYY/MM/DD"),
+                        date_type = ($datepicker.data('type') ? $datepicker.data('type') : "days"),
+                        type = ($(this).data('type') ? $(this).data('type') : "add"),
+                        amt = ($(this).data('amt') ? $(this).data('amt') : 1);
+
+                    if (type == "add") {
+                        cur_date = cur_date.add(date_type, amt);
+                    } else if (type == "subtract") {
+                        cur_date = cur_date.subtract(date_type, amt);
+                    }
+
+                    updateDisplay(cur_date);
+                });
+
+                if ($datepicker.data('keyboard') == true) {
+                    $(window).on('keydown', function (event) {
+                        if (event.which == 37) {
+                            $datepicker.find('span:eq(0)').trigger('click');
+                        } else if (event.which == 39) {
+                            $datepicker.find('span:eq(1)').trigger('click');
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('a').tooltip({ placement: 'top' });
+
+            $("#toggle1").click(function () {
+                $("#widget-body1").slideToggle("slow");
+
+                $('#toggle1').toggleClass(function () {
+                    if ($(this).is('.fa fa-chevron-down')) {
+                        return '.fa fa-chevron-up';
+                    } else {
+                        return '.fa fa-chevron-down';
+                    }
+                })
+            });
+
+            $("#toggle2").click(function () {
+                $("#widget-body2").slideToggle("slow");
+
+                $('#toggle2').toggleClass(function () {
+                    if ($(this).is('.fa fa-chevron-down')) {
+                        return '.fa fa-chevron-up';
+                    } else {
+                        return '.fa fa-chevron-down';
+                    }
+                })
+            });
+
+        });
+    </script>
+    
+   
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a href="/User/Index"><img src="~/Content/images/logo.jpg"  height="70" width="60" /></a>
+                </div>
+            </div>
+            <div class="navbar navbar-left">
+
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/Home/Index">Home</a></li>
+                    <li><a href="/User/About">About</a></li>
+                    <li><a href="/User/Contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Options<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Student/GetMarks">Entry Test Marks</a></li>
+                            <li><a href="/Student/CheckAggregate">Check Aggregate</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+    @RenderBody()
+
+</body>
+</html>

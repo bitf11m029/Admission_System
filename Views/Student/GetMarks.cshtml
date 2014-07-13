@@ -1,0 +1,30 @@
+﻿@model MvcApplication1.Models.EntryTestResult
+
+@{
+    ViewBag.Title = "GetMarks";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="jumbotron" style="background:#ffd573;width:inherit "  >
+    <h2>Get Entry Test Marks</h2>
+</div>
+
+        <div class="col-xs-6 col-md-10">
+               <b>@Html.Label("Enter Roll Number")</b>
+            
+            <div id="check">Checking....</div>
+
+            </div>
+            
+                @Html.TextBoxFor(x => x.RollNumber, new {id="rn1" , @class="form-control" });
+                <br />
+                
+                <br />
+                <div class="col-xs-6 col-sm-8">
+                </div>
+                    <input type="submit" class="btn btn-success" value="Get Marks" id="but1" />
+    <br />
+<div id="mrks"></div>
+    <div class="col-xs-6 col-sm-8">
+    </div>
+
