@@ -28,7 +28,7 @@
                          @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", id = "un", placeholder = "User Name", required = "required" })
                          @Html.TextBoxFor(x => x.EmailID, new { @class = "form-control", id = "em", placeholder = "your email", required = "required" })
                          <input type="text" id="em1" placeholder="Re-Enter Email" required class="form-control" />
-                         @Html.TextBoxFor(x => x.Password, new { @class = "form-control", id = "pa", placeholder = "New Password", required = "required" })
+                         @Html.PasswordFor(x => x.Password, new { @class = "form-control", id = "pa", placeholder = "New Password", required = "required" })
                          <label for="">
                              Birth Date
                          </label>
